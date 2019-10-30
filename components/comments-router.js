@@ -98,6 +98,27 @@ router.delete("/:id", (req, res) => {
     })
 })
 
+// PUT to edit a post
+router.put("/:id", (req, res) => {
+    const post = req.body;
+    const id = req.params.id;
 
+    if (!post.title || !post.contents) {
+        res.status(400).json({ errorMessage: "Please provide title and contents for the post." })
+    }
+    db.update(id, post)
+    .then(updated => {
+        // If updated exists, find that post by it's ID
+        if (updated > 0) {
+            db.findById(id)
+            .then(post => res.status(200).json(post))
+            .catch(err => res.status(500).json({ errorMessage: "The post with the specified ID does not exist." }))
+        } else res.status(404).json({ errorMessage: "The post with the specified ID does not exist." })
+    })
+    .catch(err => {
+        console.log("PUT request on post failed:", err)
+        res.status(500).json({ error: "The post information could not be modified." })
+    })
+})
 
 module.exports = router;
