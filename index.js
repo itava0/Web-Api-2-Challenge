@@ -4,8 +4,13 @@ const app = express();
 
 app.use(express.json());
 
+app.get('/', (res, red) => {
+  res.status(201).json({message: "Welcome to my website, please visit /api/posts to see a list of posts"})
+})
+
 app.use('/api/posts', commentsRouter);
 
-app.listen(5000, ()=> {
-  console.log('\n*** Server Running on http://localhost:5000 ***\n');
+const port = process.env.PORT || 5000;
+app.listen(port, ()=> {
+  console.log(`\n*** Server Running on port ${port} ***\n`);
 })
