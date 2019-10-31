@@ -4,9 +4,9 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/', (res, red) => {
-  res.status(201).json({message: "Welcome to my website, please visit /api/posts to see a list of posts"})
-})
+app.get('/', (req, res) => {
+  res.send(`<h2>Welcome to my website, please visit /api/posts to see a list of posts!</h2>`)
+});
 
 app.use('/api/posts', commentsRouter);
 
