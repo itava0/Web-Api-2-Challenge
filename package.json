@@ -9,7 +9,7 @@
      "start": "node index.js"
   },
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "knex": "^0.19.4",
     "sqlite3": "^4.1.0"
   },
